@@ -25,7 +25,7 @@ public class DistributedSnackbarServer {
      * @param args the command line arguments
      * @throws java.io.IOException
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, CloneNotSupportedException {
         ServerSocket serverSocket = null;
         Socket listenSocket = null;
    
@@ -57,18 +57,21 @@ public class DistributedSnackbarServer {
         }      
     }
     
-    public static void authenticateUser(User user)
+    public static void authenticateUser(User user) throws CloneNotSupportedException
     {
         UsersBuilder users = new UsersBuilder();
-        ArrayList usersFromDb = users.getUsers();
-        authenticatedUser = user;
+        ArrayList usersFromDb = users.getUsers();       
         
         for(int i=0; i<usersFromDb.size(); i++) {
             User chosen = (User) usersFromDb.get(i);
-            if(chosen.getRegistration() == user.getRegistration() && chosen.getPassword() == user.getPassword()) {
+            if(
+                    chosen.getRegistration().equalsIgnoreCase(user.getRegistration()) && 
+                    chosen.getPassword().equalsIgnoreCase(user.getPassword())
+               ) {
+                authenticatedUser = (User) chosen.clone();
                 System.out.println("User authenticated!");
                 return;
-            }            
+            }
         }
         System.out.println("Registration or password is wrong");
     }
@@ -92,6 +95,7 @@ public class DistributedSnackbarServer {
     }
     
     public static String checkMoney(float price) {
+        System.out.println(authenticatedUser.toString());
         if(price > authenticatedUser.getMoney()) {
             return "You don't have enough money to buy it";
         }

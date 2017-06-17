@@ -27,7 +27,7 @@ public class UsersBuilder {
         numberOne = new User("1234", "1");
         numberOne.setMoney(3000);
         numberTwo = new User("2345", "12");
-        numberOne.setMoney(4000);
+        numberTwo.setMoney(4000);
         numberThree = new User("9090", "123");
         numberThree.setMoney(0);
         

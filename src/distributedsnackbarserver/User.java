@@ -9,7 +9,7 @@ package distributedsnackbarserver;
  *
  * @author calvin
  */
-public class User {
+public class User implements Cloneable{
     
     private String registration;
     private String password;
@@ -43,4 +43,14 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }    
+
+    @Override
+    public String toString() {
+        return "User{" + "registration=" + registration + ", password=" + password + ", money=" + money + '}';
+    }
+    
+    public Object clone() throws CloneNotSupportedException{
+        return super.clone();
+    }
+    
 }
