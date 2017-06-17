@@ -95,10 +95,10 @@ public class DistributedSnackbarServer {
     }
     
     public static String checkMoney(float price) {
-        System.out.println(authenticatedUser.toString());
         if(price > authenticatedUser.getMoney()) {
             return "You don't have enough money to buy it";
         }
+        authenticatedUser.discountMoney(price);
         return "You will have it soon.";
     }
 }

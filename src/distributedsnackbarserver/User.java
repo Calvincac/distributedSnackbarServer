@@ -53,4 +53,7 @@ public class User implements Cloneable{
         return super.clone();
     }
     
+    public void discountMoney(Float value) {
+        this.money = this.money - value;
+    }
 }
