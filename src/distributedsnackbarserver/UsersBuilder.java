@@ -14,9 +14,7 @@ import java.util.ArrayList;
 public class UsersBuilder {
     
     private final ArrayList<User> users = new ArrayList<>();
-    private User numberOne;
-    private User numberTwo;
-    private User numberThree;
+    private User numberOne, numberTwo, numberThree;
 
     public UsersBuilder() {        
         this.buildUsers();

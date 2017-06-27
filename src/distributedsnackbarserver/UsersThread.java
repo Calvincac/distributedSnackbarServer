@@ -28,7 +28,7 @@ public class UsersThread extends Thread {
     }
 
     @Override
-     public void run() {
+    public void run() {
          
         try {
             DataInputStream input = new DataInputStream(listenSocket.getInputStream());
@@ -60,7 +60,7 @@ public class UsersThread extends Thread {
          
      }
      
-     public void authenticateUser(User user) throws CloneNotSupportedException {
+    public void authenticateUser(User user) throws CloneNotSupportedException {
         UsersBuilder users = new UsersBuilder();
         ArrayList usersFromDb = users.getUsers();       
         

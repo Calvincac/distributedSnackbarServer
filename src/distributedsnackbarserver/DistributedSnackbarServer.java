@@ -14,8 +14,7 @@ import java.net.Socket;
  *
  * @author calvin
  */
-public class DistributedSnackbarServer {
-    
+public class DistributedSnackbarServer {    
 
 
     /**
