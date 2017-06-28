@@ -27,11 +27,14 @@ public class DistributedSnackbarServer {
         Socket listenSocket = null;   
 
         serverSocket = new ServerSocket(6800);
-        System.out.println("Waiting for connection...");
-        listenSocket = serverSocket.accept();
-        System.out.println("Client connected!!");
-        
-        new UsersThread(listenSocket).start();
+        while(true) {            
+            System.out.println("Waiting for connection...");
+            listenSocket = serverSocket.accept();
+            System.out.println("Client connected!!");
+
+            new UsersThread(listenSocket).start();            
+        }
+
     }    
 
 }
