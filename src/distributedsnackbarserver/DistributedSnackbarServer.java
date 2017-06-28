@@ -21,7 +21,7 @@ public class DistributedSnackbarServer {
      * @param args the command line arguments
      * @throws java.io.IOException
      */
-    public static void main(String[] args) throws IOException, CloneNotSupportedException {
+    public static void main(String[] args) throws IOException {
         ServerSocket serverSocket;
         serverSocket = null;
         Socket listenSocket = null;   
