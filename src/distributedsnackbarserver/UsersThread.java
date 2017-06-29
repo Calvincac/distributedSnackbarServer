@@ -43,15 +43,15 @@ public class UsersThread extends Thread {
             User newUser = new User(incomingRegistration, incomingPassword);
             String authentication = authenticateUser(newUser);
             output.writeUTF(authentication);
-            
-            String message = showMenu();
-            output.writeUTF(message);
-            
+                        
             while(choice != "exit") {
+                
+                String message = showMenu();
+                output.writeUTF(message);
                 choice = input.readUTF();
                 float option = Float.parseFloat(choice);
                 String response = checkMoney(option);
-                output.writeUTF(response);
+                output.writeUTF(response);            
             }          
             
             
