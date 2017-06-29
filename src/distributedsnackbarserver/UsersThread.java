@@ -41,7 +41,9 @@ public class UsersThread extends Thread {
             log(incomingPassword);
             
             User newUser = new User(incomingRegistration, incomingPassword);
-            authenticateUser(newUser);
+            String authentication = authenticateUser(newUser);
+            output.writeUTF(authentication);
+            
             String message = showMenu();
             output.writeUTF(message);
             
@@ -50,8 +52,7 @@ public class UsersThread extends Thread {
                 float option = Float.parseFloat(choice);
                 String response = checkMoney(option);
                 output.writeUTF(response);
-            }
-            
+            }          
             
             
         } catch (IOException | CloneNotSupportedException ex) {
@@ -60,7 +61,7 @@ public class UsersThread extends Thread {
          
      }
      
-    public void authenticateUser(User user) throws CloneNotSupportedException {
+    public String authenticateUser(User user) throws CloneNotSupportedException {
         UsersBuilder users = new UsersBuilder();
         ArrayList usersFromDb = users.getUsers();       
         
@@ -72,10 +73,11 @@ public class UsersThread extends Thread {
                ) {
                 authenticatedUser = (User) chosen.clone();
                 System.out.println("User authenticated!");
-                return;
+                return "User authenticated!";
             }
         }
         System.out.println("Registration or password is wrong");
+        return "Registration or password is wrong";
      }
      
     public void log(String message) {
