@@ -107,10 +107,10 @@ public class UsersThread extends Thread {
     
     public String checkMoney(float price) {
         if(price > authenticatedUser.getMoney()) {
-            return "You don't have enough money to buy it";
+            return "\n\nYou don't have enough money to buy it\n\n";
         }
         authenticatedUser.discountMoney(price);
-        return "You will have it soon.";
+        return "\n\nYou will have it soon.\n\n";
     }
     
     public String showBalance() {
