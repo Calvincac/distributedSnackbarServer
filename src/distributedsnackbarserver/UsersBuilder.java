@@ -20,8 +20,7 @@ public class UsersBuilder {
         this.buildUsers();
     }      
     
-    private void buildUsers()
-    {
+    private void buildUsers() {
         numberOne = new User("1234", "1");
         numberOne.setMoney(3000);
         numberTwo = new User("2345", "12");

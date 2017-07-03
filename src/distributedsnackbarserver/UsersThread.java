@@ -60,8 +60,7 @@ public class UsersThread extends Thread {
                     output.writeUTF(response);
                     
                 }                         
-            }          
-            
+            }           
             
         } catch (IOException | CloneNotSupportedException ex) {
             Logger.getLogger(UsersThread.class.getName()).log(Level.SEVERE, null, ex);
