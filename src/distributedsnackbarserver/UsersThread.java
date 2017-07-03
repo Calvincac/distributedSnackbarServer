@@ -45,13 +45,21 @@ public class UsersThread extends Thread {
             output.writeUTF(authentication);
                         
             while(choice != "exit") {
+                String menuMessage = showMenu();
+                output.writeUTF(menuMessage);
+                String responseMenuMsg = input.readUTF();
                 
-                String message = showMenu();
-                output.writeUTF(message);
-                choice = input.readUTF();
-                float option = Float.parseFloat(choice);
-                String response = checkMoney(option);
-                output.writeUTF(response);            
+                if (responseMenuMsg.equalsIgnoreCase("1")) {
+                    output.writeUTF(showBalance());
+                } else if (responseMenuMsg.equalsIgnoreCase("2")) {
+                    String message = showMenuOrder();
+                    output.writeUTF(message);
+                    choice = input.readUTF();
+                    float option = Float.parseFloat(choice);
+                    String response = checkMoney(option);
+                    output.writeUTF(response);
+                    
+                }                         
             }          
             
             
@@ -88,14 +96,13 @@ public class UsersThread extends Thread {
         System.out.println("Sending message: " + message);
     }
     
-    public String showMenu() {
-        String entrance = "What is the price of your dish:\n";
-        String menu = 
-                "Fish with carrots (R$: 3.00) "
-                + "\nPasta with potatoes (R$: 5.00) "
-                + "\nRice and beans (R$: 6.00)";
-        String result = entrance + menu;
-        return result;
+    public String showMenuOrder() {
+        String entrance = "What is the price of your dish? \n"
+                + "Fish with carrots (R$: 399.00) \n"
+                + "Pasta with potatoes (R$: 566.00) \n"
+                + "Rice and beans (R$: 622.00) \n"
+                + "Type 'exit' to leave the menu!";
+        return entrance;
     }
     
     public String checkMoney(float price) {
@@ -104,5 +111,20 @@ public class UsersThread extends Thread {
         }
         authenticatedUser.discountMoney(price);
         return "You will have it soon.";
+    }
+    
+    public String showBalance() {
+        Float money = authenticatedUser.getMoney();
+        String convertedMoney = Float.toString(money);
+        
+        return "Your balance is " + convertedMoney;
+    }
+    
+    public String showMenu() {
+        String menu = "Choose one of the options below: \n"
+                + "1- Check balance \n"
+                + "2- Order dish \n"
+                + "3- Exit";
+        return menu;
     }
 }
