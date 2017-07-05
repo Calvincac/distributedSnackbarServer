@@ -22,7 +22,7 @@ public class UsersThread extends Thread {
     private String choice = null;
     private User authenticatedUser;
     private Socket listenSocket = null;
-
+    private ArrayList<String> orders = new ArrayList<>();
     public UsersThread(Socket listenSocket) {
         this.listenSocket = listenSocket;
     }
@@ -59,6 +59,8 @@ public class UsersThread extends Thread {
                     String response = checkMoney(option);
                     output.writeUTF(response);
                     
+                } else if(responseMenuMsg.equalsIgnoreCase("3")) {
+                    output.writeUTF(showOrders());
                 }                         
             }           
             
@@ -109,6 +111,7 @@ public class UsersThread extends Thread {
             return "\n\nYou don't have enough money to buy it\n\n";
         }
         authenticatedUser.discountMoney(price);
+        addOrderToQueue(authenticatedUser.getRegistration());
         return "\n\nYou will have it soon.\n\n";
     }
     
@@ -123,7 +126,19 @@ public class UsersThread extends Thread {
         String menu = "Choose one of the options below: \n"
                 + "1- Check balance \n"
                 + "2- Order dish \n"
-                + "3- Exit";
+                + "3- Show finished orders \n"
+                + "4- Exit";;
         return menu;
+    }
+    
+    public void addOrderToQueue(String userId) {        
+        orders.add(userId);
+    }
+    
+    public String showOrders() {
+        for(int i=0; i<orders.size(); i++) {
+            return ("Order user " + orders.get(i) + " is ready");
+        }
+        return null;
     }
 }
